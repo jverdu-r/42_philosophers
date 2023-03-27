@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:35:17 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/03/15 18:35:11 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:50:04 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,32 @@
 
 typedef struct	s_philo
 {
-	int				eats;
-	bool			eating;
-	bool			sleeping;
-	bool			thinking;
-	pthread_mutex_t	fork;
-}t_philo
+	int				meals;
+	int				pos;
+	char			*pos_str;
+	int				l_fork;
+	int				r_fork;
+	unsigned long	last_meal;
+	struct s_env	*env;
+	pthread_t		philo_id;
+}t_philo;
 
-typedef struct	s_list
+typedef struct s_env
 {
-	int				index;
-	struct t_philo	philo;
-	struct s_list	*next;
-}t_list
+	int				count;
+	int				tto_die;
+	int				tto_eat;
+	int				tto_sleep;
+	int				max_meals;
+	int				meals_count;
+	int				stop_con;
+	unsigned long	start_time;
+	t_philo			*philos;
+	pthread_mutex_t *forks;
+	pthread_mutex_t	meal;
+	pthread_mutex_t	writing;
+}t_env;
 
-t_list  *lst_new(t_philo philo);
-void    lst_add_back(t_list **head, t_list *new, int index);
-void    new_list(t_list *head, t_list *end, int phil_total);
+int	ft_atoi(const char *str);
 
 # endif
