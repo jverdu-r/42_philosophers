@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:46:40 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/03/27 18:47:21 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:06:45 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,34 @@ int	ft_atoi(const char *str)
 	return ((int)res);
 }
 
-int	error_msg(void)
+int	ft_isint(const char *str)
 {
-	printf("\nWrong arguments\n");
-	printf("Example : ./philo <num of philosophers> <time to die>
-			 <time to eat> [number of meals]");
-   return (-1);	
+	int		i;
+	int		neg;
+	long	val;
+
+	i = 0;
+	vaL = 0;
+	neg = 0;
+	while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+		i++;
+	if (str[i] == '-')
+		neg = 1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] != '\0' && (str[i] >= 48 || str[i] <= 57))
+	{
+		if (val > 214748364 || val == 214748364
+				&& ((!neg && str[i] - '0' > 7) || (neg && str[i] -'0' > 8)))
+				return (0);
+		else
+			val = val * 10 + str[i++] - '0';
+	}
+	return (1);
+}
+
+int	error_msg(char *str)
+{
+	printf("\n%s\n", str);
+   return (1);	
 }
