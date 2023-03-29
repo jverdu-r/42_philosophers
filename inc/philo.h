@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:35:17 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/03/29 18:17:34 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/03/29 19:23:23 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int	ft_atoi(const char *str);
 int	ft_isint(const char *str);
 int error_msg(char *str);
 int	load_resources(t_env *env);
+int	thread_start(t_env *env);
 
 # endif
