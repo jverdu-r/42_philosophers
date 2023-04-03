@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:41:10 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/03/29 18:17:31 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:35:41 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	checker(t_env *env, int argc, char *argv[])
 	{
 		if (!ft_isint(argv[i]))
 			return (0);
-		if (ft_atoi(argv[i] < 0))
+		if (ft_atoi(argv[i]) < 0)
 			return (0);
 		i++;
 	}
