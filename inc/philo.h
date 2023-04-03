@@ -6,11 +6,11 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:35:17 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/03 16:44:03 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:38:51 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PHILO_H
+#ifndef PHILO_H
 # define PHILO_H
 
 # include <unistd.h>
@@ -19,7 +19,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				meals;
 	int				pos;
@@ -41,14 +41,14 @@ typedef struct s_env
 	int				stop_con;
 	unsigned long	start_time;
 	t_philo			*philos;
-	pthread_mutex_t *forks;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	meal;
 	pthread_mutex_t	writing;
 }t_env;
 
 int				ft_atoi(const char *str);
 int				ft_isint(const char *str);
-int 			error_msg(char *str);
+int				error_msg(char *str);
 int				load_resources(t_env *env);
 int				thread_start(t_env *env);
 void			philo_tell(char *msg, t_philo *philo, int unlock);
@@ -56,4 +56,5 @@ void			philo_eat(t_philo *philo);
 void			philo_dead(t_env *env, t_philo *philo);
 void			philo_sleep(unsigned long time, t_env *env);
 unsigned long	get_time(void);
-# endif
+
+#endif
