@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:41:10 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/03 16:35:41 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:40:19 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	checker(t_env *env, int argc, char *argv[])
 	env->tto_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		env->max_meals = ft_atoi(argv[5]);
-	if (env->count < 1 || env->tto_die < 0 || env->tto_eat < 0
+	if (env->count < 1 || env->tto_die < 0 || env->tto_eat < 0 \
 			|| env->tto_sleep < 0 || env->max_meals < 0)
 		return (0);
 	return (1);

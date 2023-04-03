@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:07:37 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/03 16:34:24 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:42:22 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	philo_dead(t_env *env, t_philo *philo)
 			pthread_mutex_unlock(&env->meal);
 		}
 		if (env->stop_con)
-			break;
+			break ;
 		i = 0;
-		while (env->meals_count && i < env->count
+		while (env->meals_count && i < env->count \
 				&& philo[i].meals >= env->meals_count)
 			i++;
 		env->max_meals = (i == env->count);
@@ -69,13 +69,13 @@ void	philo_dead(t_env *env, t_philo *philo)
 
 void	philo_sleep(unsigned long time, t_env *env)
 {
-	unsigned long st;
+	unsigned long	st;
 
 	st = get_time();
 	while (!env->stop_con)
 	{
 		if (get_time() - st >= time)
-			break;
+			break ;
 		usleep(env->count * 2);
 	}
 }

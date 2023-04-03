@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:46:40 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/03 16:43:45 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:53:52 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	neg = 1;
 	res = 0;
-	while (str[i] == 32 || str[i] == '\f' || str[i] == '\n'
+	while (str[i] == 32 || str[i] == '\f' || str[i] == '\n' \
 			|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
 		i++;
 	if (str[i] == 45)
@@ -56,9 +56,9 @@ int	ft_isint(const char *str)
 		i++;
 	while (str[i] != '\0' && (str[i] >= 48 || str[i] <= 57))
 	{
-		if ((val > 214748364 || val == 214748364) 
-				&& ((!neg && str[i] - '0' > 7) || (neg && str[i] -'0' > 8)))
-				return (0);
+		if (val > 214748364 || (val == 214748364
+				&& ((!neg && str[i] - '0' > 7) || (neg && str[i] - '0' > 8))))
+			return (0);
 		else
 			val = val * 10 + str[i++] - '0';
 	}
@@ -68,7 +68,7 @@ int	ft_isint(const char *str)
 int	error_msg(char *str)
 {
 	printf("\nERROR: %s\n", str);
-   return (1);	
+	return (1);
 }
 
 unsigned long	get_time(void)

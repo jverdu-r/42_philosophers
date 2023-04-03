@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:14:14 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/03 16:42:17 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:43:56 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	thread_exit(t_env *env)
 	pthread_mutex_destroy(&env->meal);
 	pthread_mutex_destroy(&env->writing);
 	free(env->philos);
-	free(env->forks);	
+	free(env->forks);
 }
 
 int	thread_start(t_env *env)
@@ -64,7 +64,7 @@ int	thread_start(t_env *env)
 	{
 		env->philos[i].last_meal = get_time();
 		if (pthread_create(&env->philos[i].philo_id,
-					NULL, routine, &(env->philos[i])))
+				NULL, routine, &(env->philos[i])))
 			return (0);
 	}
 	philo_dead(env, env->philos);
