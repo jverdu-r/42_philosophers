@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:46:40 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/03 17:53:52 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:27:15 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_isint(const char *str)
 
 int	error_msg(char *str)
 {
-	printf("\nERROR: %s\n", str);
+	printf("\nERROR: %s", str);
 	return (1);
 }
 

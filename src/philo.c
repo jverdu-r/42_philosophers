@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:41:10 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/03 17:40:19 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:28:37 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	main(int argc, char *argv[])
 	env.max_meals = 0;
 	env.stop_con = 0;
 	if (argc < 5 || argc > 6)
-		return (error_msg("\nWrong number of arguments.\n"));
-	if (!checker(&env, argc, argv))
-		return (error_msg("\nWrong parameters.\n"));
+		return (error_msg("Wrong number of arguments.\n"));
+	if (checker(&env, argc, argv) == 0)
+		return (error_msg("Wrong parameters.\n"));
 	if (!load_resources(&env))
-		return (error_msg("\nLoad error.\n"));
+		return (error_msg("Load error.\n"));
 	if (!thread_start(&env))
-		return (error_msg("\nCould not start the threads.\n"));
+		return (error_msg("Could not start the threads.\n"));
 	return (0);
 }

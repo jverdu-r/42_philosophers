@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:14:14 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/03 17:43:56 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:36:09 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	thread_start(t_env *env)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	env->start_time = get_time();
-	while (i < env->count)
+	while (++i < env->count)
 	{
 		env->philos[i].last_meal = get_time();
 		if (pthread_create(&env->philos[i].philo_id,
