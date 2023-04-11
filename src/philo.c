@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:41:10 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/04 16:28:37 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/11 18:15:50 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	checker(t_env *env, int argc, char *argv[])
 	env->tto_eat = ft_atoi(argv[3]);
 	env->tto_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		env->max_meals = ft_atoi(argv[5]);
+		env->meals_count = ft_atoi(argv[5]);
+	else
+		env->meals_count = 0;
 	if (env->count < 1 || env->tto_die < 0 || env->tto_eat < 0 \
 			|| env->tto_sleep < 0 || env->max_meals < 0)
 		return (0);
@@ -45,11 +47,14 @@ int	main(int argc, char *argv[])
 	env.stop_con = 0;
 	if (argc < 5 || argc > 6)
 		return (error_msg("Wrong number of arguments.\n"));
-	if (checker(&env, argc, argv) == 0)
+	if (!checker(&env, argc, argv))
 		return (error_msg("Wrong parameters.\n"));
-	if (!load_resources(&env))
-		return (error_msg("Load error.\n"));
-	if (!thread_start(&env))
-		return (error_msg("Could not start the threads.\n"));
+	else
+	{
+		if (!load_resources(&env))
+			return (error_msg("Load error.\n"));
+		if (!thread_start(&env))
+			return (error_msg("Could not start the threads.\n"));
+	}
 	return (0);
 }

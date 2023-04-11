@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:46:40 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/04 16:27:15 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/11 18:22:52 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_atoi(const char *str)
 		neg = -1;
 	if (str[i] == 45 || str[i] == 43)
 		i++;
-	while (str[i] > 47 && str[i] < 58)
+	while (str[i] > 47 && str[i] < 58 && str[i] != '\0')
 	{
 		res = res * 10 + str[i] - '0';
 		if ((res >= 2147483649 && neg == -1) || (res >= 2147483648 && neg == 1))
@@ -48,19 +48,18 @@ int	ft_isint(const char *str)
 	i = 0;
 	val = 0;
 	neg = 0;
-	while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+	while (str[i] == 32 || str[i] == '\f' || str[i] == '\n' \
+			|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
 		i++;
 	if (str[i] == '-')
 		neg = 1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	while (str[i] != '\0' && (str[i] >= 48 || str[i] <= 57))
+	while (str[i] != '\0')
 	{
-		if (val > 214748364 || (val == 214748364
-				&& ((!neg && str[i] - '0' > 7) || (neg && str[i] - '0' > 8))))
+		if (str[i] < 47 || str[i] > 58)
 			return (0);
-		else
-			val = val * 10 + str[i++] - '0';
+		i++;
 	}
 	return (1);
 }

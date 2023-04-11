@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:07:37 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/04/04 16:35:38 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/04/11 18:22:31 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	philo_tell(char *msg, t_philo *philo, int unlock)
 
 void	philo_eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->env->forks[philo->l_fork]);
-	philo_tell("has taken left_fork", philo, 1);
 	pthread_mutex_lock(&philo->env->forks[philo->r_fork]);
+	philo_tell("has taken left_fork", philo, 1);
+	pthread_mutex_lock(&philo->env->forks[philo->l_fork]);
 	philo_tell("has taken right_fork", philo, 1);
 	pthread_mutex_lock(&philo->env->meal);
 	philo_tell("is eating", philo, 1);
