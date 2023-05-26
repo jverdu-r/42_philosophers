@@ -6,7 +6,7 @@
 #    By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 16:10:33 by jverdu-r          #+#    #+#              #
-#    Updated: 2023/04/04 16:10:25 by jverdu-r         ###   ########.fr        #
+#    Updated: 2023/05/26 12:43:27 by jverdu-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	philo
 
 CC		=	gcc
 INCLUDE	= 	includes
-CFLAGS	=	-Wall -Werror -Wextra -fsanitize=address -g -I$(INCLUDE)
+CFLAGS	=	-Wall -Werror -Wextra -I$(INCLUDE)
 RM		=	rm -f
 
 SRCS	=	src/load.c \
@@ -28,7 +28,7 @@ OBJS	=	$(SRCS:%.c=%.o)
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -fsanitize=thread -g3
 			@echo "Linked into executable \033[0;32mphilo\033[0m."
 
 .c.o:
