@@ -1,39 +1,33 @@
+NAME = philo
 
-NAME	=	philo
+SRCS = main.c \
+		utils.c \
+		init.c \
+		philo.c \
+		free.c \
 
-CC		=	gcc
-INCLUDE	= 	inc
-CFLAGS	=	-Wall -Werror -Wextra -I$(INCLUDE) -fsanitize=thread -g3
-RM		=	rm -f
+CC = cc
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+#FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
+RM = rm -rf
 
-LIB	=	-lpthread
-SRCS	=	src/ft_atoi.c \
-		src/main.c \
-		src/philosophers.c \
-		src/routine.c \
-		src/time.c \
-		src/utils.c 
+OBJS = ${SRCS:.c=.o}
 
-OBJS	=	$(SRCS:%.c=%.o)
+all: $(NAME)
 
-all:		$(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-$(NAME):	$(OBJS)
-			@$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
-			@echo "Linked into executable \033[0;32mphilo\033[0m."
-
-.c.o:
-			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-			@echo "Compiling $<."
+re: fclean all
 
 clean:
-			@$(RM) $(OBJS)
-			@echo "Removed object files."
+	$(RM) $(OBJS)
 
-fclean:		clean
-			@$(RM) $(NAME)
-			@echo "Removed excutable."
+fclean: clean
+	$(RM) $(NAME)
 
-re:			fclean all
+%.o : %.c
+	$(CC) $(FLAGS) -c $< -o $@
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re
