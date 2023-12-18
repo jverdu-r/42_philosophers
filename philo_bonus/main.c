@@ -20,7 +20,7 @@ static void	close_info(t_info *info)
 	i = -1;
 	while (++i < info->num_philo)
 	{
-		waitpid(-1, &stat, 0);
+		waitpid(info->philos[i].pid, &stat, 0);
 		if (stat != 0)
 		{
 			i = -1;

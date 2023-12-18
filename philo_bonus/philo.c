@@ -59,9 +59,6 @@ void	*check_dead(void *arg)
 
 void	philo_start(t_philo *philo)
 {
-	pthread_t	thread;
-
-	pthread_create(&thread, NULL, check_dead, philo);
 	if (philo->id % 2 == 0)
 		usleep(philo->info->time_to_eat * 1000);
 	while (!philo->info->finish)
@@ -71,6 +68,5 @@ void	philo_start(t_philo *philo)
 		ft_sleep(philo->info->time_to_sleep);
 		print_status(philo, "is thinking");
 	}
-	pthread_join(thread, NULL);
 	exit(0);
 }
