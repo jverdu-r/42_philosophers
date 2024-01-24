@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:51:13 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/10/30 15:51:15 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:36:15 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->info->eat_mutex);
-	if ((get_time() - philo->last_eat_time) >= philo->info->time_to_die)
+	if ((get_time() - philo->last_eat_time) > philo->info->time_to_die)
 	{
 		print_status(philo, "died");
 		check_finish(philo, 1);
