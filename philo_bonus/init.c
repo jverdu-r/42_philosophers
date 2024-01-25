@@ -5,84 +5,76 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 15:52:20 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/10/30 15:52:22 by jverdu-r         ###   ########.fr       */
+/*   Created: 2024/01/25 17:01:32 by jverdu-r          #+#    #+#             */
+/*   Updated: 2024/01/25 17:01:35 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
-int	init_info(t_info *info, int ac, char **av)
+static int	ft_init_galina(t_arg *args)
 {
-	int	i;
-
-	i = 0;
-	if (ac < 5 || ac > 6)
-		return (print_error("Error: argc it not 5, 6\n"));
-	info->num_philo = ft_atoi(av[1]);
-	info->time_to_die = ft_atoi(av[2]);
-	info->time_to_eat = ft_atoi(av[3]);
-	info->time_to_sleep = ft_atoi(av[4]);
-	if (info->num_philo < 1 || info->time_to_die < 1 || \
-			info->time_to_eat < 1 || info->time_to_sleep < 1)
-		return (print_error("Error: wrong input\n"));
-	if (ac == 6)
+	if (args->nbr_of_meals)
 	{
-		info->num_must_eat = ft_atoi(av[5]);
-		if (info->num_must_eat < 1)
-			return (print_error("Error: wrong input\n"));
-	}
-	else
-		info->num_must_eat = -1;
-	info->finish = 0;
-	return (0);
-}
-
-static sem_t	*init_sem(const char *name, unsigned int n)
-{
-	sem_t	*sem;
-
-	sem = sem_open(name, O_CREAT, 0644, n);
-	sem_unlink(name);
-	return (sem);
-}
-
-int	init_philos(t_info *info)
-{
-	int	i;
-
-	i = -1;
-	info->philos = malloc(sizeof(t_philo) * info->num_philo);
-	if (!info->philos)
-		return (print_error("Error: init_philos malloc\n"));
-	info->forks = init_sem("forks", info->num_philo);
-	info->eat_sem = init_sem("eat", 1);
-	info->print_sem = init_sem("print", 1);
-	if (info->forks == SEM_FAILED || info->eat_sem == SEM_FAILED || \
-			info->print_sem == SEM_FAILED)
-		return (print_error("Error: sem_open\n"));
-	while (++i < info->num_philo)
-	{
-		info->philos[i].id = i + 1;
-		info->philos[i].eat_cnt = 0;
-		info->philos[i].info = info;
+		if (pthread_create(&args->galina_tid, NULL, &ft_eating_checker, args))
+		{
+			printf("Error pthread");
+			return (1);
+		}
+		pthread_detach(args->galina_tid);
 	}
 	return (0);
 }
 
-void	fork_philos(t_info *info)
+void	ft_init_philo(t_arg *args)
 {
-	int	i;
-
-	i = -1;
-	info->start_time = get_time();
-	while (++i < info->num_philo)
+	args->philo.time_of_last_meal = ft_time();
+	if (pthread_create(&args->galina_tid, NULL, &ft_death_checker, args))
 	{
-		info->philos[i].last_eat_time = info->start_time;
-		info->philos[i].pid = fork();
-		if (info->philos[i].pid == 0)
-			philo_start(&info->philos[i]);
-		else if (info->philos[i].pid < 0)
-			exit(print_error("Error: fork fail\n"));
+		printf("Error pthread");
+		sem_post(args->stop);
 	}
+	pthread_detach(args->galina_tid);
+}
+
+static int	ft_init_sempahore(t_arg *args)
+{
+	sem_unlink("fork_sem");
+	sem_unlink("write_sem");
+	sem_unlink("stop");
+	sem_unlink("eat_enough");
+	args->fork_sem = sem_open("fork_sem", O_CREAT | \
+		O_EXCL, S_IRWXU, args->nbr_philo);
+	args->write_sem = sem_open("write_sem", O_CREAT | O_EXCL, S_IRWXU, 1);
+	args->stop = sem_open("stop", O_CREAT | O_EXCL, S_IRWXU, 0);
+	if (args->nbr_of_meals)
+		args->eat_enough = sem_open("eat_enough", O_CREAT | O_EXCL, S_IRWXU, 0);
+	return (0);
+}
+
+int	ft_init_args(t_arg *args, int argc, char **argv)
+{
+	memset(args, 0, sizeof(t_arg));
+	args->nbr_philo = ft_atoi(argv[1]);
+	args->time_to_die = ft_atoi(argv[2]);
+	args->time_to_eat = ft_atoi(argv[3]);
+	args->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		args->nbr_of_meals = ft_atoi(argv[5]);
+	args->pid_philo = malloc(sizeof(pid_t) * args->nbr_philo);
+	if (argc == 5)
+	{
+		if (args->nbr_philo < 1)
+			return (0);
+		args->nbr_of_meals = -1;
+	}
+	if (argc == 6)
+	{
+		if (args->nbr_of_meals < 1)
+			return (0);
+	}
+	memset(args->pid_philo, 0, sizeof(pid_t) * args->nbr_philo);
+	ft_init_sempahore(args);
+	ft_init_galina(args);
+	return (0);
 }
