@@ -20,8 +20,9 @@ SRCS = philo.c \
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
 #FLAGS = -Wall -Wextra -Werror -pthread
-#FLAGS = -Wall -Wextra -Werror -g -fsanitize=thread 
+#FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 #FLAGS = -Wall -Wextra -Werror
+
 RM = rm -rf
 
 OBJS = ${SRCS:.c=.o}
