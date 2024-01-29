@@ -18,9 +18,9 @@ SRCS = philo.c \
 		main.c \
 
 CC = gcc
-#FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
 #FLAGS = -Wall -Wextra -Werror -pthread
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+#FLAGS = -Wall -Wextra -Werror -g -fsanitize=thread 
 #FLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
@@ -29,7 +29,7 @@ OBJS = ${SRCS:.c=.o}
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	die_after_fork=0 $(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 re: fclean all
 
@@ -40,6 +40,6 @@ fclean: clean
 	$(RM) $(NAME)
 
 %.o : %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	die_after_fork=0 $(CC) $(FLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re
