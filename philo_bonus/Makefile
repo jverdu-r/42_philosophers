@@ -12,10 +12,10 @@
 
 NAME = philo_bonus
 
-SRCS = actions.c \
-		time_libc.c \
+SRCS = philo.c \
+		utils.c \
 		init.c \
-		philo_bonus.c \
+		main.c \
 
 CC = gcc
 #FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
