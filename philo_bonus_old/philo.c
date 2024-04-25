@@ -33,6 +33,7 @@ void	ft_taking_forks_eating(t_arg *args)
 	ft_usleep(args->time_to_eat);
 	sem_post(args->fork_sem);
 	sem_post(args->fork_sem);
+	sem_post(args->write_sem);
 }
 
 void	ft_sleeping_thinking(t_arg *args)

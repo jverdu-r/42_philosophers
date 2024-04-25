@@ -1,46 +1,33 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/30 15:52:10 by jverdu-r          #+#    #+#              #
-#    Updated: 2024/01/25 17:29:07 by jverdu-r         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRCS	=	sources/philo_bonus_main.c \
+			sources/philo_bonus_prep.c \
+			sources/philo_bonus_utils.c \
 
-NAME = philo_bonus
 
-SRCS = philo.c \
-		utils.c \
-		init.c \
-		main.c \
+OBJS	=	$(SRCS:.c=.o)
 
-CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
-#FLAGS = -Wall -Wextra -Werror -pthread
-#FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-#FLAGS = -Wall -Wextra -Werror
+HEADS	=	./includes/
 
-RM = rm -rf
+NAME	=	philo_bonus
 
-OBJS = ${SRCS:.c=.o}
+GCC		=	gcc
 
-all: $(NAME)
+FLAGS	=	-Wall -Wextra -Werror 
+
+RM		=	rm -f
+
+%.o: %.c ./includes/philo.h
+	$(GCC) $(FLAGS) -I$(HEADS) -c $< -o $@ 
 
 $(NAME): $(OBJS)
-	die_after_fork=0 $(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	$(GCC) $(FLAGS) $(OBJS) -o $(NAME) 
 
-re: fclean all
+all:	$(NAME)
 
 clean:
-	$(RM) $(OBJS)
+		$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+		$(RM) $(LNAME)
+		$(RM) $(NAME)
 
-%.o : %.c
-	die_after_fork=0 $(CC) $(FLAGS) -c $< -o $@
-
-.PHONY: all clean fclean re
+re:		fclean all
