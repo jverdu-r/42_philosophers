@@ -50,7 +50,7 @@ static int	ft_eat_alone(t_philo *philo)
 			if (philo->data->number_to_eat == philo->num_ate)
 				return (2);
 			sem_wait(philo->data->filedes_sem);
-			printf(I_DIED, ft_get_time(), philo->id);
+			printf(I_DIED, ft_get_time() - philo->st_time, philo->id);
 			return (1);
 		}
 		sem_post(philo->num_ate_sem);
