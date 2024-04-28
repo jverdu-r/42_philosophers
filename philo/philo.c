@@ -6,7 +6,7 @@
 /*   By: jorge <jorge@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:51:13 by jverdu-r          #+#    #+#             */
-/*   Updated: 2024/04/28 10:41:08 by jorge            ###   ########.fr       */
+/*   Updated: 2024/04/28 17:21:46 by jorge            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,8 @@ void	*philo_start(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->info->num_philo % 2 != 0)
-	{
-		if (philo->id % 2 == 0)
-			usleep(philo->info->time_to_eat * 1000);
-	}
-	else
-	{
-		if (philo->id % 2 != 0)
-			usleep(philo->info->time_to_eat * 1000);
-	}
+	if ((philo->id) % 2 != 0)
+		usleep(philo->info->time_to_eat/2);
 	while (42)
 	{
 		if (check_finish(philo, 0))

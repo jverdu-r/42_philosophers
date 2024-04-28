@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jorge <jorge@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/28 16:42:18 by jorge             #+#    #+#             */
+/*   Updated: 2024/04/28 16:45:50 by jorge            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
@@ -19,8 +31,8 @@
 # define IM_EATING "%lld %d is eating.\n"
 # define I_DIED "%lld %d has died\n"
 
-
-typedef struct s_data {
+typedef struct s_data
+{
 	int			number_to_eat;
 	int			total_philos;
 	long long	t_to_sleep;
@@ -29,7 +41,8 @@ typedef struct s_data {
 	sem_t		*filedes_sem;
 }	t_data;
 
-typedef struct s_philo {
+typedef struct s_philo
+{
 	pid_t		process_id;
 	pthread_t	thread_id;
 	int			num_ate;
@@ -51,4 +64,4 @@ void		ft_usleep(long long time);
 long long	ft_atoi(const char *num);
 long long	ft_get_time(void);
 
-#endif /* __PHILO_BONUS_H__ */
+#endif
