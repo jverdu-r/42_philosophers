@@ -7,12 +7,9 @@ int	clear_philo(t_philo **philo)
 		sem_close((*philo)->forks_sem);
 		sem_close((*philo)->num_ate_sem);
 		sem_close((*philo)->data->filedes_sem);
-		if(sem_unlink("forks") < 0)
-			printf("could not remove semaphore\n");
-		if(sem_unlink("num_ate" < 0))
-			printf("could not remove semaphore\n");
-		if(sem_unlink("fildes") < 0);
-			printf("could not remove semaphore\n");
+		sem_unlink("forks");
+		sem_unlink("num_ate");
+		sem_unlink("fildes");
 		free((*philo)->data);
 		free(*philo);
 		*philo = NULL;
