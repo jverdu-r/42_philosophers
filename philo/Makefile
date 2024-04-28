@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jorge <jorge@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/30 15:50:02 by jverdu-r          #+#    #+#              #
-#    Updated: 2023/10/30 15:50:04 by jverdu-r         ###   ########.fr        #
+#    Updated: 2024/04/28 10:37:21 by jorge            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS = main.c \
 		free.c \
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+#FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
+#FLAGS = -Wall -Werror -Wextra -pthread
 #FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 FLAGS = -Wall -Wextra -Werror
 RM = rm -rf

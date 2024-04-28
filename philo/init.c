@@ -14,9 +14,6 @@
 
 int	init_info(t_info *info, int ac, char **av)
 {
-	int	i;
-
-	i = 0;
 	if (ac < 5 || ac > 6)
 		return (print_error("Error: argc it not 5, 6\n"));
 	info->num_philo = ft_atoi(av[1]);

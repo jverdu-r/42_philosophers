@@ -11,10 +11,10 @@ NAME	=	philo_bonus
 
 GCC		=	gcc
 
-#FLAGS 	= 	-Wall -Wextra -Werror -fsanitize=thread -g3
+FLAGS 	= 	-Wall -Wextra -Werror -fsanitize=thread -g3
 #FLAGS 	= 	-Wall -Wextra -Werror -pthread
 #FLAGS 	= 	-Wall -Wextra -Werror -g -fsanitize=address
-FLAGS	=	-Wall -Wextra -Werror 
+#FLAGS	=	-Wall -Wextra -Werror 
 
 RM		=	rm -f
 

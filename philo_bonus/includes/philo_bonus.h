@@ -11,6 +11,7 @@
 # include <string.h>
 # include <signal.h>
 # include <stdio.h>
+# include <fcntl.h>
 
 # define I_TOOK_FORK "%lld %d has taken a fork.\n"
 # define IM_SLEEPING "%lld %d is sleeping.\n"

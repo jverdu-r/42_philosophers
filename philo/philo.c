@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jorge <jorge@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:51:13 by jverdu-r          #+#    #+#             */
-/*   Updated: 2024/01/24 20:36:15 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2024/04/28 10:41:08 by jorge            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	check_dead(t_philo *philo)
 
 static void	eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->info->forks[philo->left_fork]);
-	print_status(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->info->forks[philo->right_fork]);
+	print_status(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->info->forks[philo->left_fork]);
 	print_status(philo, "has taken a fork");
 	print_status(philo, "is eating");
 	ft_sleep(philo, philo->info->time_to_eat);
@@ -77,8 +77,16 @@ void	*philo_start(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2 == 0)
-		usleep(philo->info->time_to_eat * 1000);
+	if (philo->info->num_philo % 2 != 0)
+	{
+		if (philo->id % 2 == 0)
+			usleep(philo->info->time_to_eat * 1000);
+	}
+	else
+	{
+		if (philo->id % 2 != 0)
+			usleep(philo->info->time_to_eat * 1000);
+	}
 	while (42)
 	{
 		if (check_finish(philo, 0))
